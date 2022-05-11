@@ -8,16 +8,12 @@ use Klein;
 
 class ApiWrapper
 {
-    public function start($orgId, $apiKey, $baseUrl)
+    public function start($config)
     {
         $klein = new \Klein\Klein();
 
         $klein->with('/regapi', function () use ($klein) {
-            Regapi($klein, [
-                'orgId' => $orgId,
-                'apiKey' => $apiKey,
-                'baseUrl' => $baseUrl,
-            ]);
+            Regapi($klein, $config);
         });
     }
 }
