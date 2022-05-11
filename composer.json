@@ -1,0 +1,13 @@
+{
+    "name": "mango-chutney/artez-api-wrapper",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "MangoChutney\\ArtezApiWrapper\\": "src/"
+        }
+    },
+    "require": {
+      "klein/klein": "^2.1.2",
+      "guzzlehttp/guzzle": "^7.4.2"
+    }
+}
