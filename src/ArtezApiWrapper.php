@@ -2,18 +2,22 @@
 
 namespace MangoChutney\ArtezApiWrapper;
 
+require __DIR__.'/Regapi.php';
+
 use Klein;
 
-class ArtezApiWrapper
+class ApiWrapper
 {
-    public function start()
+    public function start($orgId, $apiKey, $baseUrl)
     {
-        $klein = new Klein();
+        $klein = new \Klein\Klein();
 
         $klein->with('/regapi', function () use ($klein) {
-            $klein->respond('GET', '/Constituents', function ($request, $response) {
-                print_r('Hello World');
-            });
+            Regapi($klein, [
+                'orgId' => $orgId,
+                'apiKey' => $apiKey,
+                'baseUrl' => $baseUrl,
+            ]);
         });
     }
 }
