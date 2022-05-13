@@ -12,7 +12,7 @@ $config = [
     'orgId' => 'ARTEZ_ORG_ID',
     'apiKey' => 'ARTEZ_API_KEY',
     'baseUrl' => 'ARTEZ_BASE_URL',
-    'route' => '/artez',
+    'path' => '/api',
 ];
 
 $wrapper = new ApiWrapper($config);
@@ -24,3 +24,7 @@ $wrapper->start();
 ## Lint
 
 `composer lint`
+
+## Test
+
+`php -S localhost:8000 router.php`
