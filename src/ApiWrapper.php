@@ -2,10 +2,6 @@
 
 namespace MangoChutney\ArtezApiWrapper;
 
-use MangoChutney\ArtezApiWrapper\Api\Regapi;
-use MangoChutney\ArtezApiWrapper\Api\Registrant;
-use MangoChutney\ArtezApiWrapper\Api\Webgetservice;
-
 class ApiWrapper
 {
     private $config;
@@ -17,20 +13,42 @@ class ApiWrapper
 
     public function start()
     {
-        $klein = new \Klein\Klein();
+        $dispatcher = \FastRoute\simpleDispatcher(function (\FastRoute\RouteCollector $router) {
+            (new Regapi($this->config, $router))->init();
+            (new Webgetservice($this->config, $router))->init();
+            (new Registrant($this->config, $router))->init();
+        });
 
-        $regapi = new Regapi($this->config, $klein);
+        $httpMethod = $_SERVER['REQUEST_METHOD'];
 
-        $regapi->init();
+        $uri = $_SERVER['REQUEST_URI'];
 
-        $webgetservice = new Webgetservice($this->config, $klein);
+        // strip query string (?foo=bar) and decode URI
+        if (false !== $pos = strpos($uri, '?')) {
+            $uri = substr($uri, 0, $pos);
+        }
 
-        $webgetservice->init();
+        $uri = rawurldecode($uri);
 
-        $registrant = new Registrant($this->config, $klein);
+        $routeInfo = $dispatcher->dispatch($httpMethod, $uri);
 
-        $registrant->init();
+        switch ($routeInfo[0]) {
+            case \FastRoute\Dispatcher::NOT_FOUND:
+                break;
 
-        $klein->dispatch();
+            case \FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
+                $allowedMethods = $routeInfo[1];
+
+                break;
+
+            case \FastRoute\Dispatcher::FOUND:
+                $handler = $routeInfo[1];
+
+                $vars = $routeInfo[2];
+
+                call_user_func_array($handler, $vars);
+
+                break;
+        }
     }
 }
