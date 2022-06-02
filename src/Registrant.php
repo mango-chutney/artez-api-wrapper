@@ -15,7 +15,8 @@ class Registrant extends Api
                 $file = $_FILES['attachedFile'];
 
                 $body = [
-                    ['name' => 'eventId',
+                    [
+                        'name' => 'eventId',
                         'contents' => $data['eventId'],
                     ],
                     [
