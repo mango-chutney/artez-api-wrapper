@@ -10,54 +10,52 @@ class Registrant extends Api
 
         $this->router->addGroup($group.'/registrant', function (\FastRoute\RouteCollector $router) {
             $router->addRoute('POST', '/uploadImageItem', function () {
-                $data = json_decode(file_get_contents('php://input'), true);
-
                 $file = $_FILES['attachedFile'];
 
                 $body = [
                     [
                         'name' => 'eventId',
-                        'contents' => $data['eventId'],
+                        'contents' => $_POST['eventId'],
                     ],
                     [
                         'name' => 'username',
-                        'contents' => $data['username'],
+                        'contents' => $_POST['username'],
                     ],
                     [
                         'name' => 'password',
-                        'contents' => $data['password'],
+                        'contents' => $_POST['password'],
                     ],
                     [
                         'name' => 'registrantId',
-                        'contents' => $data['registrantId'],
+                        'contents' => $_POST['registrantId'],
                     ],
                     [
                         'name' => 'organizationId',
-                        'contents' => $data['organizationId'],
+                        'contents' => $_POST['organizationId'],
                     ],
                     [
                         'name' => 'token',
-                        'contents' => $data['token'],
+                        'contents' => $_POST['token'],
                     ],
                     [
                         'name' => 'userType',
-                        'contents' => $data['userType'],
+                        'contents' => $_POST['userType'],
                     ],
                     [
                         'name' => 'pageType',
-                        'contents' => $data['pageType'],
+                        'contents' => $_POST['pageType'],
                     ],
                     [
                         'name' => 'languageCode',
-                        'contents' => $data['languageCode'],
+                        'contents' => $_POST['languageCode'],
                     ],
                     [
                         'name' => 'itemID',
-                        'contents' => $data['itemID'],
+                        'contents' => $_POST['itemID'],
                     ],
                     [
                         'name' => 'responseType',
-                        'contents' => $data['responseType'],
+                        'contents' => $_POST['responseType'],
                     ],
                     [
                         'name' => 'postType',
@@ -78,76 +76,74 @@ class Registrant extends Api
             });
 
             $router->addRoute('POST', '/setImageItem', function () {
-                $data = json_decode(file_get_contents('php://input'), true);
-
                 $body = [
                     [
                         'name' => 'eventId',
-                        'contents' => $data['eventId'],
+                        'contents' => $_POST['eventId'],
                     ],
                     [
                         'name' => 'username',
-                        'contents' => $data['username'],
+                        'contents' => $_POST['username'],
                     ],
                     [
                         'name' => 'password',
-                        'contents' => $data['password'],
+                        'contents' => $_POST['password'],
                     ],
                     [
                         'name' => 'registrantId',
-                        'contents' => $data['registrantId'],
+                        'contents' => $_POST['registrantId'],
                     ],
                     [
                         'name' => 'organizationId',
-                        'contents' => $data['organizationId'],
+                        'contents' => $_POST['organizationId'],
                     ],
                     [
                         'name' => 'token',
-                        'contents' => $data['token'],
+                        'contents' => $_POST['token'],
                     ],
                     [
                         'name' => 'userType',
-                        'contents' => $data['userType'],
+                        'contents' => $_POST['userType'],
                     ],
                     [
                         'name' => 'pageType',
-                        'contents' => $data['pageType'],
+                        'contents' => $_POST['pageType'],
                     ],
                     [
                         'name' => 'languageCode',
-                        'contents' => $data['languageCode'],
+                        'contents' => $_POST['languageCode'],
                     ],
                     [
                         'name' => 'mediaTitle',
-                        'contents' => $data['mediaTitle'],
+                        'contents' => $_POST['mediaTitle'],
                     ],
                     [
                         'name' => 'mediaDescription',
-                        'contents' => $data['mediaDescription'],
+                        'contents' => $_POST['mediaDescription'],
                     ],
                     [
                         'name' => 'mediaPath',
-                        'contents' => $data['mediaPath'],
+                        'contents' => $_POST['mediaPath'],
                     ],
                     [
                         'name' => 'defaultStatus',
-                        'contents' => $data['defaultStatus'],
+                        'contents' => $_POST['defaultStatus'],
                     ],
                     [
                         'name' => 'imageID',
-                        'contents' => $data['imageID'],
+                        'contents' => $_POST['imageID'],
                     ],
                     [
                         'name' => 'thumbnailID',
-                        'contents' => $data['thumbnailID'],
+                        'contents' => $_POST['thumbnailID'],
                     ],
                     [
                         'name' => 'itemID',
-                        'contents' => $data['itemID'],
+                        'contents' => $_POST['itemID'],
                     ],
                     [
                         'name' => 'responseType',
-                        'contents' => $data['responseType'],
+                        'contents' => $_POST['responseType'],
                     ],
                     [
                         'name' => 'postType',
