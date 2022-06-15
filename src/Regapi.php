@@ -80,6 +80,10 @@ class Regapi extends Api
             $router->addRoute('PUT', '/Teams/{teamId}', function ($teamId) {
                 $this->handleRoute('/api/Teams/'.$teamId, null, file_get_contents('php://input'));
             });
+
+            $router->addRoute('GET', '/Transactions', function () {
+                $this->handleRoute('/api/Transactions', ['TransactionID']);
+            });
         });
     }
 }
