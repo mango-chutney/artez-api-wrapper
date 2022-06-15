@@ -1,5 +1,7 @@
 {
     "name": "mango-chutney/artez-api-wrapper",
+    "description": "Artez API Wrapper",
+    "license": "MIT",
     "type": "library",
     "autoload": {
         "psr-4": {
