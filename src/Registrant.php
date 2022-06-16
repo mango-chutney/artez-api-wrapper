@@ -84,10 +84,16 @@ class Registrant extends Api
                 if ('uploadImageItem' == $postType) {
                     $file = $_FILES['attachedFile'];
 
+                    $extensions = [
+                        'image/jpeg' => '.jpg',
+                        'image/png' => '.png',
+                        'image/gif' => '.gif',
+                    ];
+
                     $body[] = [
                         'name' => 'attachedFile',
                         'contents' => fopen($file['tmp_name'], 'r'),
-                        'filename' => $file['name'],
+                        'filename' => $file['name'].$extensions[$file['type']],
                     ];
                 } elseif ('setImageItem' == $postType) {
                     $body[] = [
