@@ -9,29 +9,37 @@ class Registrant extends Api
         $group = $this->config['path'];
 
         $this->router->addGroup($group.'/registrant', function (\FastRoute\RouteCollector $router) {
-            $router->addRoute('POST', '/uploadImageItem', function () {
-                $file = $_FILES['attachedFile'];
+            $router->addRoute('POST', '/personalizationPost.aspx', function () {
+                $postType = $_POST['postType'];
+
+                $username = $_POST['username'];
+
+                $password = $_POST['password'];
 
                 $body = [
                     [
-                        'name' => 'eventId',
-                        'contents' => $_POST['eventId'],
+                        'name' => 'eventID',
+                        'contents' => $_POST['eventID'],
                     ],
                     [
-                        'name' => 'username',
-                        'contents' => $_POST['username'],
+                        'name' => 'registrantID',
+                        'contents' => $_POST['registrantID'],
                     ],
                     [
-                        'name' => 'password',
-                        'contents' => $_POST['password'],
+                        'name' => 'teamID',
+                        'contents' => $_POST['teamID'],
                     ],
                     [
-                        'name' => 'registrantId',
-                        'contents' => $_POST['registrantId'],
+                        'name' => 'corporateTeamID',
+                        'contents' => $_POST['corporateTeamID'],
                     ],
                     [
-                        'name' => 'organizationId',
-                        'contents' => $_POST['organizationId'],
+                        'name' => 'organizationID',
+                        'contents' => $_POST['organizationID'],
+                    ],
+                    [
+                        'name' => 'itemID',
+                        'contents' => $_POST['itemID'],
                     ],
                     [
                         'name' => 'token',
@@ -46,110 +54,77 @@ class Registrant extends Api
                         'contents' => $_POST['pageType'],
                     ],
                     [
-                        'name' => 'languageCode',
-                        'contents' => $_POST['languageCode'],
+                        'name' => 'postType',
+                        'contents' => $postType,
                     ],
                     [
-                        'name' => 'itemID',
-                        'contents' => $_POST['itemID'],
+                        'name' => 'languageCode',
+                        'contents' => $_POST['languageCode'],
                     ],
                     [
                         'name' => 'responseType',
                         'contents' => $_POST['responseType'],
                     ],
-                    [
-                        'name' => 'postType',
-                        'contents' => 'uploadImageItem',
-                    ],
-                    [
+                ];
+
+                if (null != $username) {
+                    $body[] = [
+                        'name' => 'username',
+                        'contents' => $username,
+                    ];
+                }
+
+                if (null != $password) {
+                    $body[] = [
+                        'name' => 'password',
+                        'contents' => $password,
+                    ];
+                }
+
+                if ('uploadImageItem' == $postType) {
+                    $file = $_FILES['attachedFile'];
+
+                    $body[] = [
                         'name' => 'attachedFile',
                         'contents' => fopen($file['tmp_name'], 'r'),
-                        'filename' => $file['name'].'.jpg',
-                    ],
-                ];
-
-                $options = [
-                    'multipart' => $body,
-                ];
-
-                $this->handleRoute('/registrant/personalizationPost.aspx', null, $body, $options);
-            });
-
-            $router->addRoute('POST', '/setImageItem', function () {
-                $body = [
-                    [
-                        'name' => 'eventId',
-                        'contents' => $_POST['eventId'],
-                    ],
-                    [
-                        'name' => 'username',
-                        'contents' => $_POST['username'],
-                    ],
-                    [
-                        'name' => 'password',
-                        'contents' => $_POST['password'],
-                    ],
-                    [
-                        'name' => 'registrantId',
-                        'contents' => $_POST['registrantId'],
-                    ],
-                    [
-                        'name' => 'organizationId',
-                        'contents' => $_POST['organizationId'],
-                    ],
-                    [
-                        'name' => 'token',
-                        'contents' => $_POST['token'],
-                    ],
-                    [
-                        'name' => 'userType',
-                        'contents' => $_POST['userType'],
-                    ],
-                    [
-                        'name' => 'pageType',
-                        'contents' => $_POST['pageType'],
-                    ],
-                    [
-                        'name' => 'languageCode',
-                        'contents' => $_POST['languageCode'],
-                    ],
-                    [
+                        'filename' => $file['name'],
+                    ];
+                } elseif ('setImageItem' == $postType) {
+                    $body[] = [
                         'name' => 'mediaTitle',
                         'contents' => $_POST['mediaTitle'],
-                    ],
-                    [
+                    ];
+
+                    $body[] = [
                         'name' => 'mediaDescription',
                         'contents' => $_POST['mediaDescription'],
-                    ],
-                    [
+                    ];
+
+                    $body[] = [
                         'name' => 'mediaPath',
                         'contents' => $_POST['mediaPath'],
-                    ],
-                    [
+                    ];
+
+                    $body[] = [
                         'name' => 'defaultStatus',
                         'contents' => $_POST['defaultStatus'],
-                    ],
-                    [
+                    ];
+
+                    $body[] = [
                         'name' => 'imageID',
                         'contents' => $_POST['imageID'],
-                    ],
-                    [
+                    ];
+
+                    $body[] = [
                         'name' => 'thumbnailID',
                         'contents' => $_POST['thumbnailID'],
-                    ],
-                    [
-                        'name' => 'itemID',
-                        'contents' => $_POST['itemID'],
-                    ],
-                    [
-                        'name' => 'responseType',
-                        'contents' => $_POST['responseType'],
-                    ],
-                    [
-                        'name' => 'postType',
-                        'contents' => 'setImageItem',
-                    ],
-                ];
+                    ];
+                } elseif ('updateMediaItemDisplayStatus' == $postType) {
+                    $body[] = [
+                        'name' => 'displayStatus',
+                        'contents' => $_POST['displayStatus'],
+                    ];
+                }
 
                 $options = [
                     'multipart' => $body,
