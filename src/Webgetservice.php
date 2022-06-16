@@ -9,19 +9,19 @@ class Webgetservice extends Api
         $group = $this->config['path'];
 
         $this->router->addGroup($group.'/webgetservice', function (\FastRoute\RouteCollector $router) {
-            $router->addRoute('GET', '/teamByTeamID', function () {
+            $router->addRoute('GET', '/get.asmx/teamByTeamID', function () {
                 $this->handleRoute('/webgetservice/get.asmx/teamByTeamID', ['languageCode', 'teamID']);
             });
 
-            $router->addRoute('GET', '/teamSearchReg', function () {
+            $router->addRoute('GET', '/get.asmx/teamSearchReg', function () {
                 $this->handleRoute('/webgetservice/get.asmx/teamSearchReg', ['eventID', 'teamName', 'captainFirstName', 'captainLastName', 'eventLocationID', 'eventLocationStartTimeID']);
             });
 
-            $router->addRoute('GET', '/postMessageBoardMain', function () {
+            $router->addRoute('GET', '/get.asmx/postMessageBoardMain', function () {
                 $this->handleRoute('/webgetservice/get.asmx/postMessageBoardMain', ['corporateTeamID', 'eventID', 'locationID', 'personID', 'registrantID', 'teamID', 'author', 'messageText', 'langPref', 'source']);
             });
 
-            $router->addRoute('POST', '/mobileParticipant', function () {
+            $router->addRoute('POST', '/mobile.asmx/mobileParticipant', function () {
                 $data = json_decode(file_get_contents('php://input'), true);
 
                 $body = [
