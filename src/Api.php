@@ -30,6 +30,10 @@ abstract class Api
 
     private function createQueryString($params)
     {
+        if (null == $params) {
+            return '';
+        }
+
         $data = [];
 
         foreach ($params as $name) {
