@@ -17,6 +17,10 @@ class Regapi extends Api
                 $this->handleRoute('/api/Constituents', null, file_get_contents('php://input'));
             });
 
+            $router->addRoute('PUT', '/Constituents', function () {
+                $this->handleRoute('/api/Constituents', ['ConstituentID'], file_get_contents('php://input'));
+            });
+
             $router->addRoute('GET', '/Locations', function () {
                 $this->handleRoute('/api/Locations', ['EventID']);
             });
