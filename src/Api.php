@@ -47,12 +47,14 @@ abstract class Api
     {
         $params = [];
 
-        $queryString = $_SERVER['QUERY_STRING'];
+        if (isset($_SERVER['QUERY_STRING'])) {
+            $queryString = $_SERVER['QUERY_STRING'];
 
-        parse_str($queryString, $params);
+            parse_str($queryString, $params);
 
-        if (array_key_exists($name, $params)) {
-            return $params[$name];
+            if (array_key_exists($name, $params)) {
+                return $params[$name];
+            }
         }
 
         return '';
