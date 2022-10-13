@@ -88,6 +88,14 @@ class Regapi extends Api
             $router->addRoute('GET', '/Transactions', function () {
                 $this->handleRoute('/api/Transactions', ['TransactionID']);
             });
+
+            $router->addRoute('POST', '/ForgotPassword', function () {
+                $this->handleRoute('/api/ForgotPassword', null, file_get_contents('php://input'));
+            });
+
+            $router->addRoute('POST', '/ForgotUsername', function () {
+                $this->handleRoute('/api/ForgotUsername', null, file_get_contents('php://input'));
+            });
         });
     }
 }
