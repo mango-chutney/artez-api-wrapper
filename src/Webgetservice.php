@@ -22,17 +22,13 @@ class Webgetservice extends Api
             });
 
             $router->addRoute('POST', '/mobile.asmx/mobileParticipant', function () {
-                $data = json_decode(file_get_contents('php://input'), true);
-
-                $body = [
-                    'eventId' => $data['eventId'],
-                    'userName' => $data['userName'],
-                    'password' => $data['password'],
-                    'languageCode' => $data['languageCode'],
-                ];
+                $body = file_get_contents('php://input');
 
                 $options = [
-                    'form_params' => $body,
+                    'body' => $body,
+                    'headers' => [
+                        'Content-Type' => 'application/x-www-form-urlencoded',
+                    ],
                 ];
 
                 $this->handleRoute('/webgetservice/mobile.asmx/mobileParticipant', null, $body, $options);
