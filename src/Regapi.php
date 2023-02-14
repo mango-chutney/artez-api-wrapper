@@ -38,7 +38,7 @@ class Regapi extends Api
             });
 
             $router->addRoute('GET', '/Teams', function () {
-                $this->handleRoute('/api/Teams', ['EventID', 'TeamName', 'TeamCaptainFirstName', 'TeamCaptainLastName']);
+                $this->handleRoute('/api/Teams', ['EventID', 'TeamName', 'TeamCaptainFirstName', 'TeamCaptainLastName', 'DisplayInTeamDirectory']);
             });
 
             $router->addRoute('GET', '/CorporateTeams', function () {
