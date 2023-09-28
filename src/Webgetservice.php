@@ -14,7 +14,7 @@ class Webgetservice extends Api
             });
 
             $router->addRoute('GET', '/get.asmx/getMessageBoard', function () {
-                $this->handleRoute('/webgetservice/get.asmx/getMessageBoard', ['teamID', 'registrantID', 'personID']);
+                $this->handleRoute('/webgetservice/get.asmx/getMessageBoard', ['teamID', 'registrantID', 'personID', 'source']);
             });
 
             $router->addRoute('GET', '/get.asmx/getParticipantScoreBoard', function () {
